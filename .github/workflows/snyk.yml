@@ -19,7 +19,7 @@ jobs:
       - name: Snyk Scan
         uses: snyk/actions/python@master
         env:
-          SNYK_TOKEN: ${{ secrets.SNYK_SEC }}
+          SNYK_TOKEN: ${{ secrets.SNYK_GITHUB_INTEGRATION_TOKEN }}
         with:
           args: --file=requirements.txt --sarif-file-output=snyk.sarif
           
