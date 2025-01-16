@@ -1,17 +1,15 @@
-FROM python:3.12
+FROM python:3.10.4
 
-ENV PORT=8080
+WORKDIR /note_api
 
-RUN adduser note_api
+COPY requirements.txt requirements-dev.txt ./
+RUN python -m pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install --upgrade pip
+RUN pip install --no-cache-dir -r requirements-dev.txt
 
-WORKDIR /code
+COPY . .
 
-COPY ./requirements.txt /code/requirements.txt
-RUN pip3 install -r requirements.txt
-
-COPY ./note_api /code/note_api
 EXPOSE 8080
-USER note_api
-CMD ["bash", "-c", "uvicorn note_api.main:app --host 0.0.0.0 --port ${PORT}"]
+
+CMD ["uvicorn", "note_api.main:app", "--host", "0.0.0.0", "--port", "8080"]
