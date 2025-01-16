@@ -12,6 +12,6 @@ COPY ./requirements.txt /code/requirements.txt
 RUN pip3 install -r requirements.txt
 
 COPY ./note_api /code/note_api
-
+EXPOSE 8080
 USER note_api
 CMD ["bash", "-c", "uvicorn note_api.main:app --host 0.0.0.0 --port ${PORT}"]
